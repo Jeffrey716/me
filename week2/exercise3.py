@@ -40,12 +40,12 @@ def loops_1a():
     return a list of 10 items, each one a string with exacly one star in it.
     E.g.: ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*']
     """
-    star_list =[]
-    for i in range (10):
-        star_list.append("*")
+    star =[]
+    for i in range (0,10):
+        star.append("*")
 
-    print(star_list)
-    return star_list
+    print(star)
+    return star
 
 
 
@@ -59,6 +59,7 @@ def loops_1c(number_of_items=5, symbol="#"):
     my_list = []
     for i in range (number_of_items):
         my_list.append(symbol)
+    print(my_list)
     return my_list
 
 
@@ -81,13 +82,12 @@ def loops_2():
           ]
     """
     start_square = []
-    for j in range(10):
+    for j in range(0, 10):
         star_list =[]
-        for i in range (10):
+        for i in range (0, 10):
             star_list.append("*")
         start_square.append(star_list)
 
-    print(star_list)
     return start_square
 
   
@@ -115,10 +115,10 @@ def loops_3():
          so call str(number) to cast.
     """
     number_square = []
-    for i in range (10):
+    for i in range (0, 10):
         number_row = str(i)
         number_square.append([number_row] * 10)
-
+    print(number_square)
     return number_square
 
 
@@ -173,11 +173,13 @@ def loops_5():
         "There are {} green bottles".format(8)
     you'll come to see the pros and cons of each over time.
     """
-    number_row = []
+    coord_cols = []
     for i in range (10):
+        coordinates_row = []
         for j in range (5):
-            coordinates_row.append("i{}, j{})" .format(i, j))
-        coord_cols= [coord_rows[x:x+5]] for x in range(o,len(coord_rows,5)]
+            coordinates_row.append("(i{}, j{})" .format(i, j))
+        coord_cols.append(coordinates_row)
+    print(coord_cols)
     return coord_cols
 
 
@@ -204,9 +206,10 @@ def loops_6():
     the_wedge =[]
     for i in range(10):
         row = []
-        for j in range(i):
-            row.append(j)
+        for j in range(i+1):
+            row.append(str(j))
         the_wedge.append(row) 
+    print(the_wedge)
     return the_wedge
 
 
