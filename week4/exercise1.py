@@ -37,16 +37,16 @@ def get_some_details():
     json_data = open(LOCAL + "/lazyduck.json").read()
 
     data = json.loads(json_data)
-    sum = data["results"][0]["location"]["postcode"] + int(data["results"][0]["id"]["value"])
+    sum = data["results"][0]["location"]["postcode"] + \
+        int(data["results"][0]["id"]["value"])
     return {"lastName":  data["results"][0]["name"]["last"], "password": data["results"][0]["login"]["password"], "postcodePlusID": sum}
 
 
 def wordy_pyramid():
     """Make a pyramid out of real words.
     There is a random word generator here:
-    http://api.wordnik.com/v4/words.json/randomWords?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5&minLength=10&maxLength=10&limit=1
-    The arguments that the generator takes is the minLength and maxLength of the word
-    as well as the limit, which is the the number of words. 
+    https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength=20
+    The generator takes a single argument, length (`wordlength`) of the word.
     Visit the above link as an example.
     Use this and the requests library to make a word pyramid. The shortest
     words they have are 3 letters long and the longest are 20. The pyramid
@@ -73,27 +73,22 @@ def wordy_pyramid():
     "Nereis",
     "Leto",
     ]
-    TIP: to add an argument to a URL, use: ?argName=argVal e.g. &minLength=
+    TIP: to add an argument to a URL, use: ?argName=argVal e.g. &wordlength=
     """
-    i = 3
-    LL = []
-    flag = 0
-    while i > 2:
-        r = requests.get('http://api.wordnik.com/v4/words.json/randomWords?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5&minLength=%s&maxLength=%s&limit=1' % (str(i),str(i)))
-        state=json.loads(r.text)
-        print(state)
-        LL.append(state[0]['word'])
-        if i == 20:
-            flag = 1
+    numberlista = list(range(3, 21, 2))
+    numberlistb = list(range(20, 2, -2))
+    numberlista.extend(numberlistb)
 
-        if flag == 0:
-            i += 2
-            if i > 20:
-                i = 20
-        else:
-            i -= 2
-    print(LL)
-    return LL
+    Pyramid = []
+    url = "https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={len}"
+
+    for i in numberlista:
+        newurl = url.format(len=i)
+        pull = requests.get(newurl)
+        data = pull.text
+        Pyramid.append(data)
+    print(Pyramid)
+    return(Pyramid)
 
 
 def pokedex(low=1, high=5):
@@ -103,7 +98,7 @@ def pokedex(low=1, high=5):
     Using the Pokemon API: https://pokeapi.co get some JSON using the request library
     (a working example is filled in below).
     Parse the json and extract the values needed.
-    
+
     TIP: reading json can someimes be a bit confusing. Use a tool like
          http://www.jsoneditoronline.org/ to help you see what's going on.
     TIP: these long json accessors base["thing"]["otherThing"] and so on, can
@@ -150,7 +145,7 @@ def diarist():
     for item in res:
         if item[0:6] == 'M10 P1':
             cnt += 1
-    f = open('./lasers.pew',"w")
+    f = open('./lasers.pew', "w")
     f.write(str(cnt))
     f.close()
 
