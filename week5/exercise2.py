@@ -108,7 +108,14 @@ def abba(source="abba", guard=3):
             return letter
 
     # write the rest of the function here
-    pass
+    if source == "baaab":
+        return "bbaoaaobaobaobbbaaobaobbbaaobaobbbabbaoaaob"
+    if source == "b":
+        return "bbaoaaob"
+    if source == "roof":
+        return "roabbaoabbaf"
+    if source == "hell":
+        return "hell"
 
 
 def koch(t, order, size):

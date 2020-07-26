@@ -148,18 +148,16 @@ def diarist():
     f = open('./lasers.pew', "w")
     f.write(str(cnt))
     f.close()
-
-
-if __name__ == "__main__":
-    functions = [
-        obj
-        for name, obj in inspect.getmembers(sys.modules[__name__])
-        if (inspect.isfunction(obj))
-    ]
-    for function in functions:
-        try:
-            print(function())
-        except Exception as e:
-            print(e)
-    if not os.path.isfile("lasers.pew"):
-        print("diarist did not create lasers.pew")
+    if __name__ == "__main__":
+        functions = [
+            obj
+            for name, obj in inspect.getmembers(sys.modules[__name__])
+            if (inspect.isfunction(obj))
+        ]
+        for function in functions:
+            try:
+                print(function())
+            except Exception as e:
+                print(e)
+        if not os.path.isfile("lasers.pew"):
+            print("diarist did not create lasers.pew")
